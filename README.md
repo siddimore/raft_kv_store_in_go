@@ -86,10 +86,6 @@ Sending heartbeats...
 └── README.md
 ```
 
-## 🔧 Building & Running
-go mod tidy
-go run ./cmd/node -id=1 -addr=127.0.0.1:8001
-
 ## 📚 Goals of This Project
 This repo is intended to be:
 A learning resource for understanding Raft in real cod
