@@ -58,6 +58,7 @@ RaftNode
 ## 🏗️ Running a Local Raft Cluster
 
 Start multiple nodes as local processes.
+```
 Node 1
 go run ./cmd/node -id=1 -addr=127.0.0.1:8001 -peers=127.0.0.1:8002,127.0.0.1:8003
 Node 2
@@ -75,6 +76,7 @@ Node 3 starting election for term 1
 Once RequestVote RPCs are fully wired, you’ll see:
 Node X becomes leader for term Y
 Sending heartbeats...
+```
 
 ## 📦 Project Layout
 ```
