@@ -6,18 +6,26 @@ import (
 	"log"
 	"net"
 	"net/rpc"
+	"strings"
 
 	"github.com/siddimore/raft-kv/internal/raft"
 )
 
 func main() {
 	id := flag.Int("id", 0, "Node ID")
-	addr := flag.String("addr", "localhost:8000", "Node address")
+	addr := flag.String("addr", "127.0.0.1:8000", "Node address")
+	peersStr := flag.String("peers", "", "Comma-separated list of peer addresses")
+
 	flag.Parse()
 
-	fmt.Printf("Starting node %d at %s\n", *id, *addr)
+	var peers []string
+	if *peersStr != "" {
+		peers = strings.Split(*peersStr, ",")
+	}
 
-	raftNode := raft.NewRaftNode(*id, nil)
+	fmt.Printf("Starting node %d at %s with peers: %v\n", *id, *addr, peers)
+
+	raftNode := raft.NewRaftNode(*id, peers)
 	server := rpc.NewServer()
 	if err := server.RegisterName("RaftNode", raftNode); err != nil {
 		log.Fatalf("failed to register RPC: %v", err)
